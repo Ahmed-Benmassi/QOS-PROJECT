@@ -16,7 +16,7 @@ NETWORK_INTERFACE = "Wi-Fi"
 
 # --- SETUP INFLUXDB CLIENT ---
 client = InfluxDBClient(url=INFLUXDB_URL, token=INFLUXDB_TOKEN, org=INFLUXDB_ORG)
-write_api = client.write_api()
+write_api = client.write_api()  
 
 
 # --- FUNCTIONS ---
