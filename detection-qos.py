@@ -11,7 +11,7 @@ INFLUXDB_TOKEN = "tFm0fX3cH6Nrhjgz75oUpTocP_sm2PEiZq4aRvNBZ9HuyVRMljKM5cLN3juv7-
 INFLUXDB_ORG = "qos-supervision"
 INFLUXDB_BUCKET = "network_metrics"
 
-PING_TARGET = "8.8.8.8"
+PING_TARGET =["8.8.8.8","1.1.1.1","150.171.27.11"]
 NETWORK_INTERFACE = "Wi-Fi"
 
 # --- SETUP INFLUXDB CLIENT ---
@@ -53,30 +53,32 @@ def get_bandwidth(interface):
     mbps = (total_bytes_per_sec * 8) / (1024 * 1024)
     return mbps
 
-def write_to_influx(latency, packet_loss, bandwidth):
+def write_to_influx(target ,latency, packet_loss, bandwidth):
     point = (
         Point("network_metrics")
+        .tag("target",target )  # Add the ping target as a tag
         .field("latency_ms", latency)
         .field("packet_loss_percent", packet_loss)
         .field("bandwidth_mbps", bandwidth)
         .time(datetime.utcnow(), WritePrecision.S)
     )
     write_api.write(bucket=INFLUXDB_BUCKET, record=point)
-    print(f"Data written: latency={latency}ms, packet_loss={packet_loss}%, bandwidth={bandwidth:.2f}Mbps")
+    print(f"Data written: target={target}, latency={latency}ms, packet_loss={packet_loss}%, bandwidth={bandwidth:.2f}Mbps")
 
 # --- MAIN LOOP ---
 
 def main():
     while True:
-        latency, packet_loss = ping_test(PING_TARGET)
-        if latency is None:
+      for target in PING_TARGET :
+         latency, packet_loss = ping_test(target)
+         if latency is None:
             print("Skipping data write due to ping failure")
-            time.sleep(60)
+            time.sleep(30)
             continue
 
-        bandwidth = get_bandwidth(NETWORK_INTERFACE)
-        write_to_influx(latency, packet_loss, bandwidth)
-        time.sleep(60)  # wait 1 min before next measurement
+         bandwidth = get_bandwidth(NETWORK_INTERFACE)
+         write_to_influx(target,latency, packet_loss, bandwidth)
+         time.sleep(30)  # wait 30 min before next measurement
 
 if __name__ == "__main__":
     main()
