@@ -1,0 +1,9 @@
+#group,false,false,true,true,false,false,true,true,true
+#datatype,string,long,dateTime:RFC3339,dateTime:RFC3339,dateTime:RFC3339,double,string,string,string
+#default,mean,,,,,,,,
+,result,table,_start,_stop,_time,_value,_field,_measurement,target
+,,0,2025-10-16T23:20:31.5809251Z,2025-10-18T23:20:31.5809251Z,2025-10-17T22:20:00Z,0.008494059244791666,bandwidth_mbps,network_metrics,150.171.27.11
+,,0,2025-10-16T23:20:31.5809251Z,2025-10-18T23:20:31.5809251Z,2025-10-17T22:30:00Z,0.34712791442871094,bandwidth_mbps,network_metrics,150.171.27.11
+,,0,2025-10-16T23:20:31.5809251Z,2025-10-18T23:20:31.5809251Z,2025-10-17T22:40:00Z,0.06428146362304688,bandwidth_mbps,network_metrics,150.171.27.11
+,,0,2025-10-16T23:20:31.5809251Z,2025-10-18T23:20:31.5809251Z,2025-10-17T22:50:00Z,0.17942047119140625,bandwidth_mbps,network_metrics,150.171.27.11
+
