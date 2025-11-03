@@ -1,15 +1,18 @@
 import subprocess
+import os
 import psutil
 import time
 from datetime import datetime
 from influxdb_client import InfluxDBClient, Point, WritePrecision, WriteOptions
+from dotenv import load_dotenv
 
+# Load environment variables
+load_dotenv()
 
-# --- CONFIGURATION ---
-INFLUXDB_URL = "http://localhost:8086"
-INFLUXDB_TOKEN = "tFm0fX3cH6Nrhjgz75oUpTocP_sm2PEiZq4aRvNBZ9HuyVRMljKM5cLN3juv7-_BCqgIoD9B2xC98wk45K6p-A=="
-INFLUXDB_ORG = "qos-supervision"
-INFLUXDB_BUCKET = "network_metrics"
+INFLUXDB_URL = os.getenv("INFLUXDB_URL")
+INFLUXDB_TOKEN = os.getenv("INFLUXDB_TOKEN")
+INFLUXDB_ORG = os.getenv("INFLUXDB_ORG")
+INFLUXDB_BUCKET = os.getenv("INFLUXDB_BUCKET")
 
 PING_TARGET =["8.8.8.8","1.1.1.1","150.171.27.11"]
 NETWORK_INTERFACE = "Wi-Fi"
@@ -78,7 +81,7 @@ def main():
 
          bandwidth = get_bandwidth(NETWORK_INTERFACE)
          write_to_influx(target,latency, packet_loss, bandwidth)
-         time.sleep(30)  # wait 30 min before next measurement
+         time.sleep(30)  # wait 30s before next measurement
 
 if __name__ == "__main__":
     main()
