@@ -1,4 +1,4 @@
-# QOS Network Supervision Tool
+# QOS Network Supervision Tool (LITTLE UPDATE)
 
 This is a Python-based Quality of Service (QoS) monitoring tool that collects and logs network performance metrics such as:
 
@@ -12,7 +12,7 @@ Metrics are written to an **InfluxDB** instance for analysis and visualization.
 
 ## 📦 Features
 
-- Continuous monitoring of a target IP (default: `8.8.8.8`)
+- Continuous monitoring of a 3 target IP (default: `8.8.8.8`, `1.1.1.1`, ` 150.171.27.11`)
 - Measures average latency and packet loss using `ping`
 - Tracks network bandwidth usage via `psutil`
 - Stores metrics in InfluxDB for easy dashboarding (e.g., Grafana)
@@ -33,5 +33,6 @@ Metrics are written to an **InfluxDB** instance for analysis and visualization.
 - time
 - influxdb_client
 - datetime
+
 
 
