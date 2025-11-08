@@ -1,9 +1,13 @@
+
+from datetime import datetime , timedelta
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import LSTM, Dense
-from influxdb_client import InfluxDBClient
+from tensorflow.keras.callbacks import EarlyStopping
+from influxdb_client import InfluxDBClient ,Point, WritePrecision
 import pandas as pd
 from sklearn.preprocessing import MinMaxScaler
 import numpy as np 
+import matplotlib.pyplot as plt 
  
 client = InfluxDBClient(url=INFLUXDB_URL, token=INFLUXDB_TOKEN, org=INFLUXDB_ORG)
 query_api = client.query_api()
@@ -41,6 +45,34 @@ model.add(LSTM(50,activation="relu",input_shape=(seq_length,x.shape[2])))
 model.add(Dense(1))
 model.compile(optimizer="adam", loss="mse")
 
+history = model.fit(
+    x_train,y_train,
+    epochs= 50
+    batch_size =32
+    validation_split=0.2
+    verbose=1
+  
+)
 
-       
+early_stop = EarlyStopping(monitor='val_loss', patience=10)
+history = model.fit(x_train, y_train, epochs=100, batch_size=32, validation_split=0.2, callbacks=[early_stop])
+
+ y_pred=model.predict(x_test)    
+y_test_scaled=y_test.reshape(-1,1)  
+y_pred_scaled=y_pred.reshape(-1,1) 
+
+bandwidth_pred = scaler.inverse_transform(np.concatenate((np.zeros((len(y_pred), 2)), y_pred_scaled), axis=1))[:,2]
+bandwidth_actual = scaler.inverse_transform(np.concatenate((np.zeros((len(y_test), 2)), y_test_scaled), axis=1))[:,2]
+
+plt.plot(bandwidth_actual,label="Actuel")
+plt.plot(bandwidth_pred,label ="Predicted")
+plt.legend()
+plt.show()
+
+for i , pred in enumerate(bandwidth_pred):
+   time_stamp= df.index[train_size + seq_length +i ]
+   point =Point("network_predicted ").field("bandwidth_mbps", pred).time(time_stamp,write_precision.s)
+   write_api.write(bucket=INFLUXDB_BUCKET,record=point)
+
+   
 
