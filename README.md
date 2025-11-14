@@ -4,7 +4,7 @@
 
 -Real-time monitoring of latency, packet loss, and bandwidth
 
--LSTM Neural Network for bandwidth prediction ( raw bandwith data )
+-LSTM Neural Network for bandwidth prediction ( using raw bandwith data i found i couldnt work with the data i detect for one small issue the dataset was small to use for ltsm)
 
 -Historical data analysis and trend forecasting
 
@@ -154,6 +154,7 @@ Total data points: 1728 Bandwidth range: 0.37 - 975.47 Mbps Average bandwidth: 8
 ✅Predictions written to InfluxDB successfully.
 
 Next Steps:i am Considering about adding real-time dashboard integration with Grafana for live monitoring and alerting capabilities.
+
 
 
 
