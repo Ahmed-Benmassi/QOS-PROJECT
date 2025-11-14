@@ -23,23 +23,32 @@ This is a Python-based Quality of Service (QoS) monitoring and prediction tool t
 🤖 Machine Learning
 
 -LSTM Neural Network for time series forecasting
--Bandwidth prediction with sequence learning
--Multi-feature analysis (bandwidth, latency, packet loss)
--Early stopping and model optimization
 
+-Bandwidth prediction with sequence learning
+
+-Multi-feature analysis (bandwidth, latency, packet loss)
+
+-Early stopping and model optimization
+ 
 📊 Data Visualization
 
 -Real-time prediction vs actual comparison plots
+
 -Training history and loss curves
+
 -Multi-feature correlation analysis
+
 -Performance metrics display
 
 💾 Data Storage & Integration
 
 
 -InfluxDB 2.x integration for time-series data
+
 -Automated prediction logging
+
 -Support for Grafana dashboards
+
 -Historical data analysis
 ----
 
@@ -117,6 +126,7 @@ Visualizations
 
 
 Next Steps:i am Considering about  adding real-time dashboard integration with Grafana for live monitoring and alerting capabilities.
+
 
 
 
