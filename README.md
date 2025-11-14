@@ -94,7 +94,7 @@ Git (to clone this repo)
 
 -------------------------
 
-##🏗️ Architecture Data Flow:
+## 🏗️Architecture Data Flow:
 
 Data Collection → Network metrics from multiple targets Preprocessing → Cleaning, scaling, sequence creation Model Training → LSTM neural network Prediction → Future bandwidth forecasting Storage → InfluxDB time-series database(doing it later ) Visualization → Real-time plots and dashboards
 
@@ -154,6 +154,7 @@ Total data points: 1728 Bandwidth range: 0.37 - 975.47 Mbps Average bandwidth: 8
 ✅Predictions written to InfluxDB successfully.
 
 Next Steps:i am Considering about adding real-time dashboard integration with Grafana for live monitoring and alerting capabilities.
+
 
 
 
