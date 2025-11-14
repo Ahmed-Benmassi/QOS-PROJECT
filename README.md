@@ -143,6 +143,9 @@ Multi-target comparison charts
 
 ## 📊Sample Output (lstm)
 
+<img width="1330" height="694" alt="image" src="https://github.com/user-attachments/assets/fdbd0b92-d2ea-469c-93dd-ec7bd9b81ffc" />
+
+
 ### 📊Data Summary:
 
 Total data points: 1728 Bandwidth range: 0.37 - 975.47 Mbps Average bandwidth: 85.23 Mbps
@@ -154,6 +157,7 @@ Total data points: 1728 Bandwidth range: 0.37 - 975.47 Mbps Average bandwidth: 8
 ✅Predictions written to InfluxDB successfully.
 
 Next Steps:i am Considering about adding real-time dashboard integration with Grafana for live monitoring and alerting capabilities.
+
 
 
 
