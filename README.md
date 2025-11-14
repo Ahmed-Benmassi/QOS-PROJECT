@@ -1,53 +1,44 @@
-QOS Network Supervision Tool (LITTLE UPDATE)
-This is a Python-based Quality of Service (QoS) monitoring and prediction tool that collects, analyzes, and forecasts network performance metrics including:
+🚦 QOS Network Supervision Tool
+A Python-based Quality of Service (QoS) Monitoring & Prediction System for real-time network performance tracking and machine learning forecasting. Continuously measures latency, packet loss, bandwidth, and predicts future trends using LSTM neural networks.
 
--Real-time monitoring of latency, packet loss, and bandwidth
+⚡ Features
+📡 Real-Time Monitoring
+24/7 QoS tracking of 3 target IPs (8.8.8.8, 1.1.1.1, 150.171.27.11)
 
--LSTM Neural Network for bandwidth prediction ( raw bandwith data )
+Latency & packet loss measurement via ping
 
--Historical data analysis and trend forecasting
+Bandwidth usage tracking with psutil
 
--InfluxDB integration for data storage and visualization
+Lightweight continuous monitoring loop
 
-📦 Features
-Continuous monitoring of a 3 target IP (default: 8.8.8.8, 1.1.1.1,  150.171.27.11)
-Measures average latency and packet loss using ping
-Tracks network bandwidth usage via psutil
-Stores metrics in InfluxDB for easy dashboarding (e.g., Grafana)
-🤖 Machine Learning
+🤖 Machine Learning Engine
+LSTM Neural Network for bandwidth prediction
 
--LSTM Neural Network for time series forecasting -Bandwidth prediction with sequence learning -Multi-feature analysis (bandwidth, latency, packet loss) -Early stopping and model optimization
+Multi-feature analysis: bandwidth, latency, packet loss
 
--LSTM Neural Network for time series forecasting
+Sequence learning with 10-step windows
 
--Bandwidth prediction with sequence learning
+Early stopping with 80-epoch patience
 
--Multi-feature analysis (bandwidth, latency, packet loss)
+Automatic data scaling and preprocessing
 
--Early stopping and model optimization
+📊 Visualization & Analytics
+Real-time prediction vs actual plots
 
-📊 Data Visualization
+Training history and loss curves
 
--Real-time prediction vs actual comparison plots -Training history and loss curves -Multi-feature correlation analysis -Performance metrics display
+Error distribution analysis
 
--Real-time prediction vs actual comparison plots
+Multi-target comparison charts
 
--Training history and loss curves
+Grafana-ready for dashboard integration
 
--Multi-feature correlation analysis
+💾 Data Storage
+InfluxDB 2.x integration for time-series data
 
--Performance metrics display
+Automated prediction logging
 
-💾 Data Storage & Integration
 
--InfluxDB 2.x integration for time-series data -Automated prediction logging -Support for Grafana dashboards -Historical data analysis
--InfluxDB 2.x integration for time-series data
-
--Automated prediction logging
-
--Support for Grafana dashboards
-
--Historical data analysis
 ⚙️ Requirements
 Python 3.x
 InfluxDB 2.x running locally or remotely
@@ -86,5 +77,6 @@ Visualizations
 ✅ Predictions written to InfluxDB successfully.
 
 Next Steps:i am Considering about adding real-time dashboard integration with Grafana for live monitoring and alerting capabilities.
+
 
 
