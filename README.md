@@ -1,5 +1,6 @@
 🚦QOS Network Supervision Tool (LITTLE UPDATE)
-This is a Python-based Quality of Service (QoS) monitoring and prediction tool that collects, analyzes, and forecasts network performance metrics including:
+
+-This is a Python-based Quality of Service (QoS) monitoring and prediction tool that collects, analyzes, and forecasts network performance metrics including:
 
 -Real-time monitoring of latency, packet loss, and bandwidth
 
@@ -139,4 +140,5 @@ Visualizations
 ✅ Predictions written to InfluxDB successfully.
 
 Next Steps:i am Considering about adding real-time dashboard integration with Grafana for live monitoring and alerting capabilities.
+
 
