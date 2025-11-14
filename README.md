@@ -1,151 +1,90 @@
-🚦 QOS Network Supervision Tool — Enhanced Overview
+QOS Network Supervision Tool (LITTLE UPDATE)
+This is a Python-based Quality of Service (QoS) monitoring and prediction tool that collects, analyzes, and forecasts network performance metrics including:
 
-A Python-based Quality of Service (QoS) Monitoring & Prediction System designed for real-time network performance tracking and machine-learning-based forecasting.
-This tool continuously measures latency, packet loss, bandwidth, and predicts future usage trends using an LSTM neural network — all with optional InfluxDB + Grafana integration.
+-Real-time monitoring of latency, packet loss, and bandwidth
 
-⚡ Core Capabilities
-📡 Real-Time Network Monitoring
+-LSTM Neural Network for bandwidth prediction ( raw bandwith data )
 
-Continuous QoS measurement for 3 target IPs
-(default: 8.8.8.8, 1.1.1.1, 150.171.27.11)
+-Historical data analysis and trend forecasting
 
-Average latency & packet loss calculation via ping
+-InfluxDB integration for data storage and visualization
 
-Live bandwidth usage tracking with psutil
+📦 Features
+Continuous monitoring of a 3 target IP (default: 8.8.8.8, 1.1.1.1,  150.171.27.11)
+Measures average latency and packet loss using ping
+Tracks network bandwidth usage via psutil
+Stores metrics in InfluxDB for easy dashboarding (e.g., Grafana)
+🤖 Machine Learning
 
-Lightweight and efficient loop for 24/7 monitoring
+-LSTM Neural Network for time series forecasting -Bandwidth prediction with sequence learning -Multi-feature analysis (bandwidth, latency, packet loss) -Early stopping and model optimization
 
-🤖 Machine Learning Engine
-🔮 LSTM Time-Series Prediction
+-LSTM Neural Network for time series forecasting
 
-Predicts raw bandwidth usage (Mbps)
+-Bandwidth prediction with sequence learning
 
-Multi-feature model:
-→ bandwidth, latency, packet loss
+-Multi-feature analysis (bandwidth, latency, packet loss)
 
-Sequence learning (10-step windows)
+-Early stopping and model optimization
 
-Early stopping with 80-epoch patience
+📊 Data Visualization
 
-Automatic scaling and pre/post-processing
+-Real-time prediction vs actual comparison plots -Training history and loss curves -Multi-feature correlation analysis -Performance metrics display
 
-🧠 Model Configuration
+-Real-time prediction vs actual comparison plots
 
-Sequence Length: 10
+-Training history and loss curves
 
-LSTM Units: 16–50 (ReLU activation)
+-Multi-feature correlation analysis
 
-Validation Split: 20%
-
-Prediction Horizon: 10–20 timesteps
-
-📊 Visual Analytics
-🚀 Built-in Plots
-
-Actual vs. predicted bandwidth curves
-
-Loss history for training & validation
-
-Error distribution charts
-
-Correlation heatmaps for multi-feature analysis
-
-Multi-target comparison visualization
-
-🎛️ Dashboard-Ready
-
-Fully compatible with Grafana, for:
-
-live bandwidth insights
-
-QoS alerting
-
-predictive trend dashboards
+-Performance metrics display
 
 💾 Data Storage & Integration
-🗄️ InfluxDB 2.x Support
 
-Real-time metric insertion
+-InfluxDB 2.x integration for time-series data -Automated prediction logging -Support for Grafana dashboards -Historical data analysis
+-InfluxDB 2.x integration for time-series data
 
-Prediction logging
+-Automated prediction logging
 
-Works with local or remote instances
+-Support for Grafana dashboards
 
-Ready for Grafana dashboards
-
-📦 Requirements
-🔧 System
-
+-Historical data analysis
+⚙️ Requirements
 Python 3.x
-
-InfluxDB 2.x (optional, but recommended)
-
-InfluxDB CLI
-
-Git
-
-🐍 Python Packages
+InfluxDB 2.x running locally or remotely
+InfluxDB CLI 2.x
+Git (to clone this repo)
+📚 Python Packages
 subprocess
 psutil
 time
 influxdb_client
 datetime
+Core dependencies
+-tensorflow>=2.8.0 -pandas>=1.3.0 -numpy>=1.21.0 -scikit-learn>=1.0.0 -matplotlib>=3.5.0 -seaborn>=0.11.0 -python-dotenv>=0.19.0
 
+🏗️ Architecture Data Flow:
 
-Core ML / Data Stack:
+Data Collection → Network metrics from multiple targets Preprocessing → Cleaning, scaling, sequence creation Model Training → LSTM neural network Prediction → Future bandwidth forecasting Storage → InfluxDB time-series database(doing it later ) Visualization → Real-time plots and dashboards
 
-tensorflow >= 2.8.0
-pandas >= 1.3.0
-numpy >= 1.21.0
-scikit-learn >= 1.0.0
-matplotlib >= 3.5.0
-seaborn >= 0.11.0
-python-dotenv >= 0.19.0
+Model Configuration:
 
-🧭 Data Flow Architecture
-Data Collection
-     ↓
-Preprocessing  → cleaning, scaling, windowing
-     ↓
-Model Training (LSTM)
-     ↓
-Prediction Engine
-     ↓
-InfluxDB Storage (optional)
-     ↓
-Visualization (matplotlib / Grafana)
+Sequence Length: 10 time steps LSTM Layers: 16-50 units with ReLU activation Training: Early stopping with 80 patience Validation: 20% split for model evaluation
+📈 Output & Metrics Performance Metrics
 
-📈 Example Output (LSTM)
-📊 Data Summary
+MAE (Mean Absolute Error): Prediction accuracy in Mbps R² Score: Model fit quality (0-1 scale) Training Loss: Model convergence monitoring Prediction Horizon: 10-20 future time steps
 
-Total samples: 1728
+Visualizations
 
-Bandwidth range: 0.37 – 975.47 Mbps
+-Actual vs Predicted bandwidth trends -Training/validation loss curves -Error distribution analysis -Multi-target comparison charts
 
-Average: 85.23 Mbps
+📊 Sample Output (lstm)
 
-🏁 Final Results
+📊 Data Summary: Total data points: 1728 Bandwidth range: 0.37 - 975.47 Mbps Average bandwidth: 85.23 Mbps
 
-MAE: 12.45 Mbps
+🎉 FINAL RESULTS: MAE: 12.45 Mbps R² Score: 0.8347 Epochs trained: 156 Test samples: 345
 
-R² Score: 0.8347
+✅ Predictions written to InfluxDB successfully.
 
-Epochs trained: 156
+Next Steps:i am Considering about adding real-time dashboard integration with Grafana for live monitoring and alerting capabilities.
 
-Test samples: 345
-
-✔️ Predictions successfully written to InfluxDB.
-
-🚀 Next Steps
-🔧 Planned Enhancements
-
-Live Grafana dashboard for real-time:
-
-bandwidth visualizations
-
-latency & packet loss panels
-
-ML prediction overlays
-
-alerting (e.g., high latency, bandwidth drops)
 
