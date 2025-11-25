@@ -17,6 +17,14 @@ Measures average latency and packet loss using ping
 Tracks network bandwidth usage via psutil
 Stores metrics in InfluxDB for easy dashboarding (e.g., Grafana)
 
+## Facebook Prophet
+- **Purpose**: Long-term trend analysis and seasonal forecasting
+- **Features**:
+  - Holiday effect modeling
+  - Confidence intervals for predictions
+- **Advantages**: Handles missing data, outliers, and seasonal patterns effectively
+
+
 ## 🤖Machine Learning
 
 -LSTM Neural Network for time series forecasting
@@ -33,8 +41,6 @@ Stores metrics in InfluxDB for easy dashboarding (e.g., Grafana)
 
 -Training history and loss curves
 
--Multi-feature correlation analysis
-
 -Performance metrics display
 
 ## 💾Data Storage & Integration
@@ -46,27 +52,25 @@ Stores metrics in InfluxDB for easy dashboarding (e.g., Grafana)
 -Support for Grafana dashboards
 
 -Historical data analysis
--Historical data analysis
 
 -------------------------------
 
 ## 📝Requirements
 Python 3.x
-Python 3.x
 
 InfluxDB 2.x running locally or remotely
-InfluxDB 2.x running locally or remotely
 
-InfluxDB CLI 2.x
 InfluxDB CLI 2.x
 
 Git to clone this repo
-Git (to clone this repo)
+
 
 ## 📚Python Packages
 
 
 -subprocess
+
+-prophet
 
 -psutil
 
@@ -124,8 +128,11 @@ Sequence Length: 10 time steps LSTM Layers: 16-50 units with ReLU activation Tra
 -Prediction Horizon: 10-20 future time steps
 
 ### Visualizations
+![WhatsApp Image 2025-11-25 at 18 36 41_aa53fef4](https://github.com/user-attachments/assets/d36c9456-b32d-4b07-a3da-70c5c87297e3)
 
 -Actual vs Predicted bandwidth trends 
+![WhatsApp Image 2025-11-25 at 23 03 29_c61d4b64](https://github.com/user-attachments/assets/c2fd9d85-a185-4862-8cd5-2b210d0f07cd)
+
 
 -Training/validation loss curves
 
@@ -133,13 +140,6 @@ Sequence Length: 10 time steps LSTM Layers: 16-50 units with ReLU activation Tra
 
 Multi-target comparison charts
 
--Actual vs Predicted bandwidth trends
-
--Training/validation loss curves
-
--Error distribution analysis
-
--Multi-target comparison charts
 
 ## 📊Sample Output (lstm)
 
@@ -157,6 +157,7 @@ Total data points: 1728 Bandwidth range: 0.37 - 975.47 Mbps Average bandwidth: 8
 ✅Predictions written to InfluxDB successfully.
 
 Next Steps:i am Considering about adding real-time dashboard integration with Grafana for live monitoring and alerting capabilities.
+
 
 
 
