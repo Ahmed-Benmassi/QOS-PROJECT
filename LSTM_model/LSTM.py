@@ -5,7 +5,7 @@ from datetime import datetime , timedelta
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Input, LSTM, Dense
 from tensorflow.keras.callbacks import EarlyStopping
-from influxdb_client import InfluxDBClient ,Point, WritePrecision
+from influxdb_client import InfluxDBClient ,Point, WritePrecision, WriteOptions
 from sklearn.preprocessing import MinMaxScaler
 from data_preprocessor import load_and_preprocess_data
 from dotenv import load_dotenv
@@ -15,9 +15,11 @@ import pandas as pd
 import numpy as np 
 import matplotlib.pyplot as plt 
 import seaborn as sns
+from influxdb_client.rest import ApiException
+from influxdb_client import QueryApi
 
 # Load environment variables
-load_dotenv()
+load_dotenv(dotenv_path=r"C:\Users\HP\Documents\qos project\LSTM_model\predicted.env")
 
 INFLUXDB_URL = os.getenv("INFLUXDB_URL")
 INFLUXDB_TOKEN = os.getenv("INFLUXDB_TOKEN")
@@ -97,10 +99,87 @@ ax.grid(True, linestyle="--", alpha=0.5)
 plt.tight_layout()
 plt.show()
 
-# --- Write predictions to InfluxDB ---
-for i, pred in enumerate(bandwidth_pred):
-    time_stamp = df.index[train_size + seq_length + i]
-    point = Point("network_predicted").field("bandwidth_mbps", float(pred)).time(time_stamp, WritePrecision.S)
-    write_api.write(bucket=INFLUXDB_BUCKET, record=point)
+# --- Write predictions to InfluxDB with proper timestamps ---
+def write_to_influx(bandwidth, timestamp):
+    try:
+        point = (
+            Point("network_predicted")
+            .field("bandwidth_mbps", float(bandwidth))
+            .time(timestamp, WritePrecision.S)
+        )
+        write_api.write(bucket=INFLUXDB_BUCKET, record=point)
+        print(f"✅ Data written: {timestamp}, bandwidth={bandwidth:.2f}Mbps")
+        return True
+    except Exception as e:
+        print(f"❌ Error writing data: {e}")
+        return False
 
-print("✅ Predictions written to InfluxDB successfully.")
+try:
+    health = client.health()
+    print(f"🔌 InfluxDB Health: {health.status}")
+except Exception as e:
+    print(f"❌ Cannot connect to InfluxDB: {e}")
+
+# Write predictions with proper timestamps
+base_time = datetime.utcnow()
+success_count = 0
+
+for i, bandwidth in enumerate(bandwidth_pred):
+    timestamp = base_time + timedelta(seconds=i)
+    if write_to_influx(bandwidth, timestamp):  # Remove target parameter
+        success_count += 1
+
+print(f"📊 Successfully wrote {success_count}/{len(bandwidth_pred)} predictions")
+
+# Force flush and close
+write_api.flush()
+time.sleep(2)  # Give time for writes to complete
+# --- ADD THIS: Write actual bandwidth data to InfluxDB ---
+print("📤 Writing ACTUAL bandwidth data to InfluxDB...")
+actual_success_count = 0
+
+for i, bandwidth in enumerate(bandwidth_actual):
+    timestamp = base_time + timedelta(seconds=i)
+   
+    point = (
+        Point("network_metrics")  # Different measurement for actual data
+        .field("bandwidth_mbps", float(bandwidth))
+        .time(timestamp, WritePrecision.S)
+    )
+    write_api.write(bucket=INFLUXDB_BUCKET, record=point)
+    actual_success_count += 1
+
+print(f"📊 Successfully wrote {actual_success_count}/{len(bandwidth_actual)} ACTUAL bandwidth points")
+
+# Force flush again to ensure actual data is written
+write_api.flush()
+time.sleep(2)
+
+# --- Verify the data was written ---
+from influxdb_client import QueryApi
+
+def verify_predictions():
+    query_api = client.query_api()
+    query = f'''
+    from(bucket: "{INFLUXDB_BUCKET}")
+      |> range(start: -1h)
+      |> filter(fn: (r) => r._measurement == "network_predicted")
+    '''
+    
+    try:
+        tables = query_api.query(query)
+        count = 0
+        for table in tables:
+            for record in table.records:
+                print(f"📊 Found: {record.get_time()} | {record.get_field()} = {record.get_value()}")
+                count += 1
+        print(f"✅ Total records found in InfluxDB: {count}")
+        return count
+    except Exception as e:
+        print(f"❌ Query error: {e}")
+        return 0
+
+# Run verification
+verify_predictions()
+
+print(" Predictions written to InfluxDB successfully.")
