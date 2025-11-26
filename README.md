@@ -130,6 +130,9 @@ Sequence Length: 10 time steps LSTM Layers: 16-50 units with ReLU activation Tra
 -Prediction Horizon: 10-20 future time steps
 
 ### Visualizations
+# detected DATA in InfluxDB
+<img width="389" height="311" alt="image" src="https://github.com/user-attachments/assets/7ee7cb46-c47b-4a13-ba34-53e3cec99529" />
+
 
 # prophet visualitaion of predicted data 
 
@@ -156,6 +159,7 @@ Total data points: 1728 Bandwidth range: 0.37 - 975.47 Mbps Average bandwidth: 8
 ### 🎉FINAL RESULTS: 
 
 -MAE: 12.45 Mbps R² Score: 0.8347 Epochs trained: 156 Test samples: 345
+
 
 
 
