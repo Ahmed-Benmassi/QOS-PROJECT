@@ -135,24 +135,19 @@ Sequence Length: 10 time steps LSTM Layers: 16-50 units with ReLU activation Tra
 
 <img width="973" height="587" alt="image" src="https://github.com/user-attachments/assets/98310769-ba4c-4e23-a39f-ed2308c8c2fe" />
 
-## 📊Sample Output (lstm)
+# 📊Sample Output (lstm)
 
 <img width="1330" height="694" alt="image" src="https://github.com/user-attachments/assets/fdbd0b92-d2ea-469c-93dd-ec7bd9b81ffc" />
+
+## GRAFANA visualization
 
 # predicted data from LSTM 
 ![WhatsApp Image 2025-11-25 at 18 36 41_aa53fef4](https://github.com/user-attachments/assets/d36c9456-b32d-4b07-a3da-70c5c87297e3)
 
 
-## Actual vs Predicted bandwidth trends 
+# FINALLY Actual vs Predicted bandwidth trends 
 ![WhatsApp Image 2025-11-25 at 23 03 29_c61d4b64](https://github.com/user-attachments/assets/c2fd9d85-a185-4862-8cd5-2b210d0f07cd)
 
-
-
--Training/validation loss curves
-
--Error distribution analysis -
-
-Multi-target comparison charts
 
 ### 📊Data Summary:
 
@@ -165,6 +160,7 @@ Total data points: 1728 Bandwidth range: 0.37 - 975.47 Mbps Average bandwidth: 8
 ✅Predictions written to InfluxDB successfully.
 
 Next Steps:i am Considering about adding real-time dashboard integration with Grafana for live monitoring and alerting capabilities.
+
 
 
 
