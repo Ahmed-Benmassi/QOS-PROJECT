@@ -4,11 +4,13 @@
 
 -Real-time monitoring of latency, packet loss, and bandwidth
 
+-using PROPHET for bandwidth predictionfrom the collected data 
+
 -LSTM Neural Network for bandwidth prediction ( using raw bandwith data i found i couldnt work with the data i detect for one small issue the dataset was small to use for ltsm)
 
 -Historical data analysis and trend forecasting
 
--InfluxDB integration for data storage and visualization
+-InfluxDB and Grafana integration for data storage and visualization
 
 ------------------------------------
 # 📦Features
@@ -133,6 +135,9 @@ Sequence Length: 10 time steps LSTM Layers: 16-50 units with ReLU activation Tra
 -Actual vs Predicted bandwidth trends 
 ![WhatsApp Image 2025-11-25 at 23 03 29_c61d4b64](https://github.com/user-attachments/assets/c2fd9d85-a185-4862-8cd5-2b210d0f07cd)
 
+-prophet visualitaion of data prediction's 
+
+<img width="973" height="587" alt="image" src="https://github.com/user-attachments/assets/98310769-ba4c-4e23-a39f-ed2308c8c2fe" />
 
 -Training/validation loss curves
 
@@ -157,6 +162,7 @@ Total data points: 1728 Bandwidth range: 0.37 - 975.47 Mbps Average bandwidth: 8
 ✅Predictions written to InfluxDB successfully.
 
 Next Steps:i am Considering about adding real-time dashboard integration with Grafana for live monitoring and alerting capabilities.
+
 
 
 
