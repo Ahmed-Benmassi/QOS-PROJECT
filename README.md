@@ -157,9 +157,7 @@ Total data points: 1728 Bandwidth range: 0.37 - 975.47 Mbps Average bandwidth: 8
 
 -MAE: 12.45 Mbps R² Score: 0.8347 Epochs trained: 156 Test samples: 345
 
-✅Predictions written to InfluxDB successfully.
 
-Next Steps:i am Considering about adding real-time dashboard integration with Grafana for live monitoring and alerting capabilities.
 
 
 
