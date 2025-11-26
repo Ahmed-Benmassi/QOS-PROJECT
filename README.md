@@ -4,11 +4,13 @@
 
 -Real-time monitoring of latency, packet loss, and bandwidth
 
+-using PROPHET for bandwidth predictionfrom the collected data 
+
 -LSTM Neural Network for bandwidth prediction ( using raw bandwith data i found i couldnt work with the data i detect for one small issue the dataset was small to use for ltsm)
 
 -Historical data analysis and trend forecasting
 
--InfluxDB integration for data storage and visualization
+-InfluxDB and Grafana integration for data storage and visualization
 
 ------------------------------------
 # 📦Features
@@ -16,6 +18,14 @@ Continuous monitoring of a 3 target IP (default: 8.8.8.8, 1.1.1.1,  150.171.27.1
 Measures average latency and packet loss using ping
 Tracks network bandwidth usage via psutil
 Stores metrics in InfluxDB for easy dashboarding (e.g., Grafana)
+
+## Facebook Prophet
+- **Purpose**: Long-term trend analysis and seasonal forecasting
+- **Features**:
+  - Holiday effect modeling
+  - Confidence intervals for predictions
+- **Advantages**: Handles missing data, outliers, and seasonal patterns effectively
+
 
 ## 🤖Machine Learning
 
@@ -33,8 +43,6 @@ Stores metrics in InfluxDB for easy dashboarding (e.g., Grafana)
 
 -Training history and loss curves
 
--Multi-feature correlation analysis
-
 -Performance metrics display
 
 ## 💾Data Storage & Integration
@@ -46,27 +54,25 @@ Stores metrics in InfluxDB for easy dashboarding (e.g., Grafana)
 -Support for Grafana dashboards
 
 -Historical data analysis
--Historical data analysis
 
 -------------------------------
 
 ## 📝Requirements
 Python 3.x
-Python 3.x
 
 InfluxDB 2.x running locally or remotely
-InfluxDB 2.x running locally or remotely
 
-InfluxDB CLI 2.x
 InfluxDB CLI 2.x
 
 Git to clone this repo
-Git (to clone this repo)
+
 
 ## 📚Python Packages
 
 
 -subprocess
+
+-prophet
 
 -psutil
 
@@ -124,26 +130,26 @@ Sequence Length: 10 time steps LSTM Layers: 16-50 units with ReLU activation Tra
 -Prediction Horizon: 10-20 future time steps
 
 ### Visualizations
+# detected DATA in InfluxDB
+<img width="389" height="311" alt="image" src="https://github.com/user-attachments/assets/7ee7cb46-c47b-4a13-ba34-53e3cec99529" />
 
--Actual vs Predicted bandwidth trends 
 
--Training/validation loss curves
+# prophet visualitaion of predicted data 
 
--Error distribution analysis -
+<img width="973" height="587" alt="image" src="https://github.com/user-attachments/assets/98310769-ba4c-4e23-a39f-ed2308c8c2fe" />
 
-Multi-target comparison charts
-
--Actual vs Predicted bandwidth trends
-
--Training/validation loss curves
-
--Error distribution analysis
-
--Multi-target comparison charts
-
-## 📊Sample Output (lstm)
+# 📊Sample Output (lstm)
 
 <img width="1330" height="694" alt="image" src="https://github.com/user-attachments/assets/fdbd0b92-d2ea-469c-93dd-ec7bd9b81ffc" />
+
+## GRAFANA visualization
+
+# predicted data from LSTM 
+![WhatsApp Image 2025-11-25 at 18 36 41_aa53fef4](https://github.com/user-attachments/assets/d36c9456-b32d-4b07-a3da-70c5c87297e3)
+
+
+# FINALLY Actual vs Predicted bandwidth trends 
+![WhatsApp Image 2025-11-25 at 23 03 29_c61d4b64](https://github.com/user-attachments/assets/c2fd9d85-a185-4862-8cd5-2b210d0f07cd)
 
 
 ### 📊Data Summary:
@@ -154,9 +160,12 @@ Total data points: 1728 Bandwidth range: 0.37 - 975.47 Mbps Average bandwidth: 8
 
 -MAE: 12.45 Mbps R² Score: 0.8347 Epochs trained: 156 Test samples: 345
 
-✅Predictions written to InfluxDB successfully.
 
-Next Steps:i am Considering about adding real-time dashboard integration with Grafana for live monitoring and alerting capabilities.
+
+
+
+
+
 
 
 
