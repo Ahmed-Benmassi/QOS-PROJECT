@@ -3,7 +3,7 @@ from prophet import Prophet
 import matplotlib.pyplot as plt
 
 # Step 1: Load the CSV and clean columns
-df = pd.read_csv("bandwith_150.171.27.11.csv", skiprows=3)
+df = pd.read_csv(r"C:\Users\HP\Documents\qos project\data\qos-data.csv", skiprows=3)
 df.columns = df.columns.str.strip()  # remove extra spaces
 
 # Debugging: Show column names
@@ -16,7 +16,7 @@ for col in required_cols:
         raise ValueError(f"Missing required column: {col}")
 
 # Step 3: Filter for target IP
-target_ip = '150.171.27.11'
+target_ip = '8.8.8.8'
 df = df[df['target'] == target_ip]
 
 # Step 4: Rename and convert columns
@@ -31,7 +31,6 @@ print(df[['ds', 'y']].head())
 # Step 5: Prophet modeling
 model = Prophet()
 model.fit(df[['ds', 'y']])
-
 # Step 6: Make future forecast
 future = model.make_future_dataframe(periods=1, freq="min")
 forecast = model.predict(future)
